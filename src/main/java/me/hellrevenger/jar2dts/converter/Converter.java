@@ -16,22 +16,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Converter {
-
     public static void convert() throws IOException {
         var f = new File(TypeScriptData.INSTANCE.inputFile);
         if(!f.exists()){
             System.out.println("could not find specify input file: " + f.getAbsolutePath());
             return;
         }
-        var jar = new Jar(TypeScriptData.INSTANCE.inputFile);
-        TypeScriptData.INSTANCE.jar = jar;
-        List<String> classNames = jar.getClasses();
-        for(var className : classNames) {
-            var byteCode = jar.getFileData(className);
+
+        var adapter = TypeScriptData.INSTANCE.adapter;
+        for (var entry : adapter.getClasses()) {
+            var byteCode = adapter.getInputStream(entry);
             ClassReader cr = new ClassReader(byteCode);
             JavaClassVisitor classVisitor = new JavaClassVisitor();
             cr.accept(classVisitor, ClassReader.SKIP_FRAMES);
-
         }
 
         TypeScriptData.INSTANCE.parse();

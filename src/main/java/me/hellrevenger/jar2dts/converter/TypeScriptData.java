@@ -1,6 +1,7 @@
 package me.hellrevenger.jar2dts.converter;
 
 
+import me.hellrevenger.jar2dts.converter.Adapters.BaseAdapter;
 import me.hellrevenger.jar2dts.typescriptDeclarations.Function;
 import me.hellrevenger.jar2dts.typescriptDeclarations.Namespace;
 import me.hellrevenger.jar2dts.typescriptDeclarations.Variable;
@@ -11,8 +12,7 @@ import java.util.HashSet;
 
 public class TypeScriptData {
     public static final TypeScriptData INSTANCE = new TypeScriptData();
-
-    public Jar jar;
+    public BaseAdapter adapter;
 
     public boolean reduceScope = true;
 

@@ -30,18 +30,21 @@ public class Main {
             }
         }
 
-
-
         TypeScriptData.INSTANCE.setPrefix(options.get("prefix").value());
         TypeScriptData.INSTANCE.inputFile = options.get("input").value();
         TypeScriptData.INSTANCE.outputFile = options.get("output").value();
         TypeScriptData.INSTANCE.reduceScope = options.get("noReduce").value().equals("true");
 
-        if(TypeScriptData.INSTANCE.inputFile.equals("")) {
+        if (TypeScriptData.INSTANCE.inputFile.endsWith(".jmod")) {
+            TypeScriptData.INSTANCE.adapter = new me.hellrevenger.jar2dts.converter.Adapters.JmodAdapter(new File(TypeScriptData.INSTANCE.inputFile));
+        } else {
+            TypeScriptData.INSTANCE.adapter = new me.hellrevenger.jar2dts.converter.Adapters.JarAdapter(new File(TypeScriptData.INSTANCE.inputFile));
+        }
+
+        if(TypeScriptData.INSTANCE.inputFile.isEmpty()) {
             System.out.println("-i inputFile -o outputFile -p prefix");
         } else {
             Converter.convert();
         }
-
     }
 }

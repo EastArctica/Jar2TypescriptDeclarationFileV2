@@ -19,7 +19,7 @@ public class Scope {
             if(scope.endsWith("$" + target)) {
                 return scopes1[scopes1.length-1];
             }
-            for(var className : TypeScriptData.INSTANCE.jar.getClasses()) {
+            for(var className : TypeScriptData.INSTANCE.adapter.getClasses()) {
                 className = className.substring(0, className.length() - 6).replace("/",".");
                 var index = className.lastIndexOf(".");
                 if(!className.substring(0, index).equals(scope.substring(0, scope.lastIndexOf(".")))) {
