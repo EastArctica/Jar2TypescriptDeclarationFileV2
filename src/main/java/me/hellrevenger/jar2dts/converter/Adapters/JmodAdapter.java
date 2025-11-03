@@ -31,11 +31,13 @@ public class JmodAdapter extends BaseAdapter {
         var entries = zipFile.entries();
         while (entries.hasMoreElements()) {
             var entry = entries.nextElement();
-            if (!entry.getName().startsWith("classes/") || !entry.getName().endsWith(".class")) {
+            if (!entry.getName().startsWith("classes/")
+                    || !entry.getName().endsWith(".class")
+                    || entry.getName().contains("-")) {
                 continue;
             }
 
-            // TODO: Check if name includes '-'? I'm unsure why the JarAdapter does this.
+
             classesCache.add(entry.getName());
         }
 
